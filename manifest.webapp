@@ -1,0 +1,22 @@
+{
+  "version": "0.0.1",
+  "name": "FireChat",
+  "launch_path": "/index.html",
+  "description": "Chat with friends using Firebase",
+  "developer": {
+    "name": "Rishi Vishwakarma",
+    "url": "https://rishinc.com"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "FireChat",
+      "description": "Chat with friends using Firebase"
+    }
+  }
+}

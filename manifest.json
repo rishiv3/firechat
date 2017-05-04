@@ -1,0 +1,7 @@
+{
+  "name": "FireChat",
+  "short_name": "FireChat",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait"
+}

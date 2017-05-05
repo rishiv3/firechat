@@ -1,2 +1,3 @@
-# firechat
-chat system with firebase and angularJS
+# FireChat
+
+Chat system with Firebase and AngularJS

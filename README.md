@@ -6,3 +6,4 @@ Firechat is an open-source, real-time chat widget built on Firebase. It offers f
 TODO : 
 1. login with email
 2. one to one chat
+3. add files on script folder app.js and main.js

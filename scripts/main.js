@@ -85,12 +85,11 @@ FriendlyChat.prototype.saveMessage = function(e) {
   // Check that the user entered a message and is signed in.
   if (this.messageInput.value && this.checkSignedInWithMessage()) {
     var currentUser = this.auth.currentUser;
-    var currentTime = new Date().toLocaleDateString() + ' ' +  new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric"});
     // Add a new message entry to the Firebase Database.
     this.messagesRef.push({
       name: currentUser.displayName,
       text: this.messageInput.value,
-      createdAt: currentTime,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
       photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
     }).then(function() {
       // Clear message text field and SEND button state.
@@ -284,7 +283,7 @@ FriendlyChat.prototype.displayMessage = function(key, name, text, picUrl, imageU
     div.querySelector('.pic').style.backgroundImage = 'url(' + picUrl + ')';
   }
   div.querySelector('.name').textContent = name;
-  div.querySelector('.time').textContent = createdAt;
+  div.querySelector('.time').textContent = new Date(createdAt).toLocaleDateString() + ' ' + new Date(createdAt).toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric"});
   var messageElement = div.querySelector('.message');
   if (text) { // If the message is text.
     messageElement.textContent = text;

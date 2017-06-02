@@ -3,6 +3,8 @@ body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
+input[type="text"]{font-family: inherit;}
+
 main,
 #messages-card {
     height: 100%;

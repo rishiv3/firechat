@@ -1,5 +1,5 @@
 #OS junk files
-[Tt]humbs.db
+Thumbs.db
 *.DS_Store
 
 #Tooling
@@ -8,8 +8,8 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 
 #Project files
-[Bb]uild/
-scripts/init.js
+Bbuild/
+/scripts/init.js
 firechat
 firechat.pub
 

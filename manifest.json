@@ -6,7 +6,7 @@
     "orientation": "portrait",
 	"background_color": "#fff",
 	"theme_color": "aliceblue",
-	"description": "A simply chat web app with firebse.",
+	"description": "A simply readable Hacker News app.",
 	"related_applications": [{
 		"platform": "web",
 		"url": "https://rishinc.com/firebase"

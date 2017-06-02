@@ -1,11 +1,9 @@
-// Initialize Firebase
-// TODO: Replace with your project's customized code snippet
 if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected. You must include it before /__/firebase/init.js');
 firebase.initializeApp({
-  "apiKey": "<API_KEY>",
-  "databaseURL": "https://<PROJECT_ID>.firebaseio.com",
-  "storageBucket": "<PROJECT_ID>.appspot.com",
-  "authDomain": "<PROJECT_ID>.firebaseapp.com",
-  "messagingSenderId": "<SENDER_ID>",
-  "projectId": "<PROJECT_ID>"
+  "apiKey": "AIzaSyCietdVuYkyDkTg2LKaManozoga7s2oJ-Y",
+  "databaseURL": "https://chatapp-8c48b.firebaseio.com",
+  "storageBucket": "chatapp-8c48b.appspot.com",
+  "authDomain": "chatapp-8c48b.firebaseapp.com",
+  "messagingSenderId": "930516833636",
+  "projectId": "chatapp-8c48b"
 });

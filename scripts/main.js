@@ -29,6 +29,7 @@ function FriendlyChat() {
   this.mediaCapture = document.getElementById('mediaCapture');
   this.userPic = document.getElementById('user-pic');
   this.userName = document.getElementById('user-name');
+  this.userId = document.getElementById('user-id');
   this.signInButton = document.getElementById('sign-in');
   this.signOutButton = document.getElementById('sign-out');
   this.signInSnackbar = document.getElementById('must-signin-snackbar');
@@ -79,6 +80,27 @@ FriendlyChat.prototype.loadMessages = function() {
   this.messagesRef.limitToLast(12).on('child_changed', setMessage);
 };
 
+// Triggers when new user singup.
+FriendlyChat.prototype.createUser = function(){
+  var user = firebase.auth().currentUser;
+  var name, email, photoUrl, uid, emailVerified;
+  if (user != null) {
+    // Reference to the /users/ database path.
+  this.usersRef = this.database.ref('users');
+  this.usersRef.off();
+
+  this.usersRef.push({
+      name: user.displayName,
+      email: user.email,
+      photoUrl: user.photoURL,
+      emailVerified: user.emailVerified,
+      uid: user.uid,  
+    }).then(function(data) {/*console.log(data)*/}.bind(this)).catch(function(error) {
+      console.error('Error writing new user to Firebase Database', error);
+    });
+  }
+}
+
 // Saves a new message on the Firebase DB.
 FriendlyChat.prototype.saveMessage = function(e) {
   e.preventDefault();
@@ -89,7 +111,7 @@ FriendlyChat.prototype.saveMessage = function(e) {
   //console.log(currentUser.providerData[0].uid);
     this.messagesRef.push({
       name: currentUser.displayName,
-      userId: currentUser.providerData[0].uid,
+      userId: currentUser.uid,
       text: this.messageInput.value,
       textTime : firebase.database.ServerValue.TIMESTAMP,
       photoUrl: currentUser.photoURL || 'images/profile_placeholder.png'
@@ -142,7 +164,7 @@ FriendlyChat.prototype.saveImageMessage = function(event) {
     var currentUser = this.auth.currentUser;
     this.messagesRef.push({
       name: currentUser.displayName,
-      userId: currentUser.providerData[0].uid,
+      userId: currentUser.uid,
       imageUrl: FriendlyChat.LOADING_IMAGE_URL,
       photoUrl: currentUser.photoURL || 'images/profile_placeholder.png'
     }).then(function(data) {
@@ -177,15 +199,17 @@ FriendlyChat.prototype.signOut = function() {
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
   //console.log(user)
+  //function call for creating users
+  this.createUser(user);
   if (user) { // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = user.photoURL;
     var userName = user.displayName;
-    var userId = user.uid;
-
+    //var userId = user.uid;
     // Set the user's profile pic and name.
     this.userPic.style.backgroundImage = 'url(' + (profilePicUrl || 'images/profile_placeholder.png') + ')';
     this.userName.textContent = userName;
+    this.userId.textContent = user.uid;
 
     // Show user's profile and sign-out button.
     this.userName.removeAttribute('hidden');
@@ -262,13 +286,23 @@ FriendlyChat.resetMaterialTextfield = function(element) {
 };
 
 
-// Template for messages.
-FriendlyChat.MESSAGE_TEMPLATE =
-    '<div class="message-container">' +
+// Template for receiver(right) messages.
+FriendlyChat.MESSAGE_TEMPLATE_SENDER =
+    '<div class="message-container-right">' +
       '<div class="spacing"><div class="pic"></div></div>' +
       '<div class="message"></div>' +
-      '<div class="name"></div>' +
-      '<div class="time"></div><div id="userId"></div>' +
+      '<div class="time"></div>' +
+      //'<div class="name"></div>' +
+      '<div id="userId"></div>' +
+    '</div>';
+
+// Template for sender(left) messages.
+FriendlyChat.MESSAGE_TEMPLATE_RECEIVER =
+    '<div class="message-container-left">' +
+      '<div class="spacing"><div class="pic"></div></div>' +
+      '<div class="message"></div>' +
+     // '<div class="name"></div>' +
+      '<div class="time"></div>' +
     '</div>';
 
 // A loading image URL.
@@ -276,23 +310,28 @@ FriendlyChat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 
 // Displays a Message in the UI.
 FriendlyChat.prototype.displayMessage = function(key, userId, name, text, textTime, picUrl, imageUri) {
-  var div = document.getElementById(key);
+  var div = document.getElementById(key); // key is firebase key
   // If an element for that message does not exists yet we create it.
+    //console.log(this.userId.textContent, userId);
   if (!div) {
+    var audio = new Audio('beep.mp3');
     var container = document.createElement('div');
-    container.innerHTML = FriendlyChat.MESSAGE_TEMPLATE;
+    if (this.userId.textContent == userId) {
+      container.innerHTML = FriendlyChat.MESSAGE_TEMPLATE_SENDER;
+    }else{
+      audio.play();
+      container.innerHTML = FriendlyChat.MESSAGE_TEMPLATE_RECEIVER;
+    }
     div = container.firstChild;
     div.setAttribute('id', key);
     this.messageList.appendChild(div);
-    var audio = new Audio('beep.mp3');
-    audio.play();
     //alert(text);
   }
   if (picUrl) {
     div.querySelector('.pic').style.backgroundImage = 'url(' + picUrl + ')';
   }
-  div.querySelector('.name').textContent = name;
-  div.querySelector('#userId').textContent = userId;
+  //div.querySelector('.name').textContent = name;
+  //div.querySelector('#userId').textContent = userId;
 
 
   var date = new Date(textTime);
@@ -306,6 +345,9 @@ FriendlyChat.prototype.displayMessage = function(key, userId, name, text, textTi
   div.querySelector('.time').textContent = actualTime;
   var messageElement = div.querySelector('.message');
   if (text) { // If the message is text.
+    if (this.userId.textContent != userId) {
+      audio.play();
+    }
     messageElement.textContent = text;
     // Replace all line breaks by <br>.
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');

@@ -73,7 +73,7 @@ FriendlyChat.prototype.loadMessages = function() {
   // Loads the last 12 messages and listen for new ones.
   var setMessage = function(data) {
     var val = data.val();
-    this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl, val.createdAt);
+    this.displayMessage(data.key, val.userId, val.name, val.text, val.textTime, val.photoUrl, val.imageUrl);
   }.bind(this);
   this.messagesRef.limitToLast(12).on('child_added', setMessage);
   this.messagesRef.limitToLast(12).on('child_changed', setMessage);
@@ -86,12 +86,13 @@ FriendlyChat.prototype.saveMessage = function(e) {
   if (this.messageInput.value && this.checkSignedInWithMessage()) {
     var currentUser = this.auth.currentUser;
     // Add a new message entry to the Firebase Database.
+  //console.log(currentUser.providerData[0].uid);
     this.messagesRef.push({
       name: currentUser.displayName,
       userId: currentUser.providerData[0].uid,
       text: this.messageInput.value,
-      createdAt: firebase.database.ServerValue.TIMESTAMP,
-      photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
+      textTime : firebase.database.ServerValue.TIMESTAMP,
+      photoUrl: currentUser.photoURL || 'images/profile_placeholder.png'
     }).then(function() {
       // Clear message text field and SEND button state.
       FriendlyChat.resetMaterialTextfield(this.messageInput);
@@ -143,7 +144,7 @@ FriendlyChat.prototype.saveImageMessage = function(event) {
       name: currentUser.displayName,
       userId: currentUser.providerData[0].uid,
       imageUrl: FriendlyChat.LOADING_IMAGE_URL,
-      photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
+      photoUrl: currentUser.photoURL || 'images/profile_placeholder.png'
     }).then(function(data) {
 
       // Upload the image to Cloud Storage.
@@ -175,13 +176,15 @@ FriendlyChat.prototype.signOut = function() {
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
+  //console.log(user)
   if (user) { // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = user.photoURL;
     var userName = user.displayName;
+    var userId = user.uid;
 
     // Set the user's profile pic and name.
-    this.userPic.style.backgroundImage = 'url(' + (profilePicUrl || '/images/profile_placeholder.png') + ')';
+    this.userPic.style.backgroundImage = 'url(' + (profilePicUrl || 'images/profile_placeholder.png') + ')';
     this.userName.textContent = userName;
 
     // Show user's profile and sign-out button.
@@ -258,20 +261,21 @@ FriendlyChat.resetMaterialTextfield = function(element) {
   element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
 };
 
+
 // Template for messages.
 FriendlyChat.MESSAGE_TEMPLATE =
     '<div class="message-container">' +
       '<div class="spacing"><div class="pic"></div></div>' +
       '<div class="message"></div>' +
       '<div class="name"></div>' +
-      '<div class="time"></div>' +
+      '<div class="time"></div><div id="userId"></div>' +
     '</div>';
 
 // A loading image URL.
 FriendlyChat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 
 // Displays a Message in the UI.
-FriendlyChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri, createdAt) {
+FriendlyChat.prototype.displayMessage = function(key, userId, name, text, textTime, picUrl, imageUri) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
@@ -280,12 +284,26 @@ FriendlyChat.prototype.displayMessage = function(key, name, text, picUrl, imageU
     div = container.firstChild;
     div.setAttribute('id', key);
     this.messageList.appendChild(div);
+    var audio = new Audio('beep.mp3');
+    audio.play();
+    //alert(text);
   }
   if (picUrl) {
     div.querySelector('.pic').style.backgroundImage = 'url(' + picUrl + ')';
   }
   div.querySelector('.name').textContent = name;
-  div.querySelector('.time').textContent = new Date(createdAt).toLocaleDateString() + ' ' + new Date(createdAt).toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric"});
+  div.querySelector('#userId').textContent = userId;
+
+
+  var date = new Date(textTime);
+  var actualTime = (date.getMonth() + 1) + "/" +
+      date.getDate() + "/" +
+      date.getFullYear() + " " +
+      date.getHours() + ":" +
+      date.getMinutes();/* + ":" +
+      date.getSeconds();*/
+
+  div.querySelector('.time').textContent = actualTime;
   var messageElement = div.querySelector('.message');
   if (text) { // If the message is text.
     messageElement.textContent = text;

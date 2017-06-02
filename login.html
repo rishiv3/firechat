@@ -1,35 +1,71 @@
-<!doctype html>
-<html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Email Login</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!DOCTYPE html>
+<html>
+  <head>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-        <!--<link rel="stylesheet" href="css/main.css"> -->
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Learn how to use the Firebase platform on the Web">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Data">
+    <meta name="theme-color" content="#303F9F">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Data">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
+    <!-- Tile icon for Win8 -->
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta name="msapplication-navbutton-color" content="#303F9F">
+    <!-- Material Design Lite -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-        <!-- Add your site or application content here -->
-        <h2>Email Login</h2>
+    <!-- App Styling -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="shortcut icon" href="favicon.ico">
 
-        <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')</script>
-
-        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-        <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
-        </script>
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-    </body>
+    <link type="text/css" rel="stylesheet" href="styles/firebaseui.css" />
+    <link href="styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+  </head>
+  <body>
+    <div id="container">
+      <h3>Login</h3>
+      <div id="loading">Loading...</div>
+      <div id="loaded" class="hidden">
+        <div id="main">
+          <div id="user-signed-in" class="hidden">
+            <div id="user-info">
+              <div id="photo-container">
+                <img id="photo">
+              </div>
+              <div id="name"></div>
+              <div id="email"></div>
+              <div id="phone"></div>
+              <div class="clearfix"></div>
+            </div>
+            <p>
+              <button id="sign-out">Sign Out</button>
+              <button id="delete-account">Delete account</button>
+            </p>
+          </div>
+          <div id="user-signed-out" class="hidden">
+            <h4>You are signed out.</h4>
+            <div id="firebaseui-spa">
+              <div id="firebaseui-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="scripts/firebase.js"></script>
+    <script src="scripts/firebaseui.js"></script>
+    <script src="scripts/init.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
 </html>

@@ -5,7 +5,7 @@ Thumbs.db
 #Tooling
 _ReSharper*/
 *.resharper
-[Tt]est[Rr]esult*
+TestRresult*
 
 #Project files
 Bbuild/

@@ -88,6 +88,7 @@ FriendlyChat.prototype.saveMessage = function(e) {
     // Add a new message entry to the Firebase Database.
     this.messagesRef.push({
       name: currentUser.displayName,
+      userId: currentUser.providerData[0].uid,
       text: this.messageInput.value,
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
@@ -140,6 +141,7 @@ FriendlyChat.prototype.saveImageMessage = function(event) {
     var currentUser = this.auth.currentUser;
     this.messagesRef.push({
       name: currentUser.displayName,
+      userId: currentUser.providerData[0].uid,
       imageUrl: FriendlyChat.LOADING_IMAGE_URL,
       photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
     }).then(function(data) {

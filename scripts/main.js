@@ -81,7 +81,7 @@ FriendlyChat.prototype.loadMessages = function() {
 };
 
 // Triggers when new user singup.
-FriendlyChat.prototype.createUser = function(){
+FriendlyChat.prototype.userLog = function(){
   var user = firebase.auth().currentUser;
   var name, email, photoUrl, uid, emailVerified;
   if (user != null) {
@@ -94,7 +94,8 @@ FriendlyChat.prototype.createUser = function(){
       email: user.email,
       photoUrl: user.photoURL,
       emailVerified: user.emailVerified,
-      uid: user.uid,  
+      uid: user.uid,
+      time:firebase.database.ServerValue.TIMESTAMP
     }).then(function(data) {/*console.log(data)*/}.bind(this)).catch(function(error) {
       console.error('Error writing new user to Firebase Database', error);
     });
@@ -200,7 +201,7 @@ FriendlyChat.prototype.signOut = function() {
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
   //console.log(user)
   //function call for creating users
-  this.createUser(user);
+  this.userLog(user);
   if (user) { // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = user.photoURL;

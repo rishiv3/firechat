@@ -51,26 +51,32 @@
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <!-- Header section containing logo -->
-        <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+        <!-- <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
             <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
                 <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                    <div id="user-container">
-                        <div hidden id="user-pic"></div>
-                        <div hidden id="user-name"></div>
-                        <div hidden id="user-id"></div>
-                        <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-                            Sign-out
-                        </button>
-                        <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-                            <i class="material-icons">account_circle</i>Sign-in with Google
-                        </button>
-                        <!-- <button class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                        Enable Push Messaging
-                                          </button> -->
-                    </div>
+
                 </div>
             </div>
-        </header>
+        </header> -->
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
+              <!-- Title -->
+              <span class="mdl-layout-title">Firebase</span>
+              <!-- Add spacer, to align navigation to the right -->
+              <div class="mdl-layout-spacer"></div>
+                <div id="user-container">
+                    <div hidden id="user-pic"></div>
+                    <div hidden id="user-name"></div>
+                    <div hidden id="user-id"></div>
+                    <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                        Sign-out
+                    </button>
+                    <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                        <i class="material-icons">account_circle</i>Sign-in with Google
+                    </button>
+                </div>
+            </div>
+          </header>
         <main class="mdl-layout__content mdl-color--grey-100">
             <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
                 <!-- Messages container -->

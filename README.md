@@ -5,4 +5,7 @@ Firechat is an open-source, real-time chat widget built on Firebase. It offers f
 
 Clone this repo or downlaod the code and update details in **init.js** 
 
-TODO - Add Notification for new message 
+TODO - 
+1. Add Notification for new message 
+2. Add user profile
+3. login with multiple social media sites 

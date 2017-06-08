@@ -195,6 +195,7 @@ FriendlyChat.prototype.signIn = function() {
 FriendlyChat.prototype.signOut = function() {
   // Sign out of Firebase.
   this.auth.signOut();
+  window.location= "index.html";
 };
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
@@ -256,7 +257,7 @@ FriendlyChat.prototype.checkSignedInWithMessage = function() {
 FriendlyChat.prototype.saveMessagingDeviceToken = function() {
   firebase.messaging().getToken().then(function(currentToken) {
     if (currentToken) {
-      console.log('Got FCM device token:', currentToken);
+      //console.log('Got FCM device token:', currentToken);
       // Saving the Device Token to the datastore.
       firebase.database().ref('/fcmTokens').child(currentToken)
           .set(firebase.auth().currentUser.uid);

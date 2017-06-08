@@ -22,12 +22,14 @@
 function getRecaptchaMode() {
   // Quick way of checking query params in the fragment. If we add more config
   // we might want to actually parse the fragment as a query string.
-  return 'invisible';//location.hash.indexOf('recaptcha=invisible') !== -1 ? 'invisible' : 'normal';
+  return location.hash.indexOf('recaptcha=invisible') !== -1 ? 'invisible' : 'normal';
 }
 
 
 function getUiConfig() {
   return {
+    // Url to redirect to after a successful sign-in.
+    //'signInSuccessUrl': '/', // not working 
     'callbacks': {
       // Called when the user has been successfully signed in.
       'signInSuccess': function(user, credential, redirectUrl) {
@@ -37,14 +39,14 @@ function getUiConfig() {
       }
     },
     // Opens IDP Providers sign-in flow in a popup.
-    'signInFlow': 'popup',
+    'signInFlow': signInWithPopup(),
     'signInOptions': [
       // TODO(developer): Remove the providers you don't need for your app.
       {
         provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         scopes: ['https://www.googleapis.com/auth/plus.login']
       },
-      {
+      /*{
         provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         scopes :[
           'public_profile',
@@ -65,7 +67,7 @@ function getUiConfig() {
         recaptchaParameters: {
           size: getRecaptchaMode()
         }
-      }
+      }*/
     ],
     // Terms of service url.
     'tosUrl': 'https://www.google.com'
@@ -80,16 +82,8 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
  * @return {string} The URL of the FirebaseUI standalone widget.
  */
 function getWidgetUrl() {
-  return '/widget#recaptcha=' + getRecaptchaMode();
+  return 'index.html#recaptcha=' + getRecaptchaMode();
 }
-
-
-/**
- * Redirects to the FirebaseUI widget.
- */
-var signInWithRedirect = function() {
-  window.location.assign(getWidgetUrl());
-};
 
 
 /**
@@ -116,6 +110,7 @@ var handleSignedInUser = function(user) {
   } else {
     document.getElementById('photo').style.display = 'none';
   }
+  window.location = "profile.html"
 };
 
 
@@ -159,8 +154,7 @@ var deleteAccount = function() {
  * Handles when the user changes the reCAPTCHA config.
  */
 function handleRecaptchaConfigChange() {
-  var newRecaptchaValue = document.querySelector(
-      'input[name="recaptcha"]:checked').value;
+  var newRecaptchaValue = "normal";
   location.replace(location.pathname + '#recaptcha=' + newRecaptchaValue);
 
   // Reset the inline widget so the config changes are reflected.
@@ -177,11 +171,16 @@ var initApp = function() {
   document.getElementById('sign-out').addEventListener('click', function() {
     firebase.auth().signOut();
   });
+
   document.getElementById('delete-account').addEventListener(
       'click', function() {
         deleteAccount();
       });
 
+  // Check the selected reCAPTCHA mode.
+  document.querySelector(
+      'input[name="recaptcha"][value="' + getRecaptchaMode() + '"]')
+      .checked = true;
 };
 
 window.addEventListener('load', initApp);

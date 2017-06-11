@@ -1,12 +1,12 @@
-html,
-body {
+html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
-input[type="text"]{font-family: inherit;}
+input[type="text"]{
+    font-family: inherit;
+}
 
-main,
-#messages-card {
+main, #messages-card {
     height: 100%;
     padding-bottom: 0;
 }
@@ -20,26 +20,10 @@ main,
     margin-top: 15px;
 }
 
-/* .mdl-layout__header-row span {
-    margin-left: 15px;
-    margin-top: 17px;
-} */
-
 .mdl-grid {
     max-width: 1024px;
     margin: auto;
 }
-
-/* .material-icons {
-    font-size: 36px;
-    top: 8px;
-    position: relative;
-} */
-
-/* .mdl-layout__header-row {
-    padding: 0;
-    margin: 0 auto;
-} */
 
 .mdl-card__supporting-text {
     width: auto;

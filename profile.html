@@ -23,6 +23,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Profile</title>
 
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="images/android-desktop.png">
@@ -79,8 +81,11 @@
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
-          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a> -->
           <div class="mdl-layout-spacer"></div>
+          <button disabled class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            Enable Push Messaging
+          </button>
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a> -->
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--black-100">
@@ -113,6 +118,10 @@
                 <button class="mdl-snackbar__action" type="button"></button>
             </div>
         </div>
+        <br>
+        <section hidden class="subscription-details js-subscription-details is-invisible">
+          <pre><code class="js-subscription-json"></code></pre>
+        </section>
       </main>
     </div>
     <script src="scripts/material.min.js"></script>

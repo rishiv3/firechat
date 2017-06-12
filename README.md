@@ -9,4 +9,3 @@ TODO -
 1. Add Notification for new message 
 2. Add user profile
 3. login with multiple social media sites 
-4. emoji 

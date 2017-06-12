@@ -39,7 +39,7 @@ function getUiConfig() {
       }
     },
     // Opens IDP Providers sign-in flow in a popup.
-    'signInFlow': signInWithPopup(),
+    'signInFlow':'popup',
     'signInOptions': [
       // TODO(developer): Remove the providers you don't need for your app.
       {
@@ -178,9 +178,9 @@ var initApp = function() {
       });
 
   // Check the selected reCAPTCHA mode.
-  document.querySelector(
+  /*document.querySelector(
       'input[name="recaptcha"][value="' + getRecaptchaMode() + '"]')
-      .checked = true;
+      .checked = true;*/
 };
 
 window.addEventListener('load', initApp);

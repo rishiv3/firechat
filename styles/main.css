@@ -176,7 +176,6 @@ main, #messages-card {
 }
 
 #message-form .mdl-textfield {
-    /* width: calc(100% - 100px); */
     width: 100%;
 }
 
@@ -293,7 +292,7 @@ div#userId{display: none;}
 }
 ::-webkit-scrollbar-thumb {
     background: #888
-}​
+}
 
 /* style */
 
@@ -494,7 +493,6 @@ _:-ms-input-placeholder, :root .demo-graph {
       -ms-flex-align: center;
           align-items: center;
 }
-
 
 
 div#user-pic {

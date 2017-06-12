@@ -202,7 +202,7 @@ FriendlyChat.prototype.signOut = function() {
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
   //console.log(user)
   //function call for creating users
-  this.userLog(user);
+  //this.userLog(user);
   if (user) { // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = user.photoURL;
@@ -350,7 +350,17 @@ FriendlyChat.prototype.displayMessage = function(key, userId, name, text, textTi
     if (this.userId.textContent != userId) {
       audio.play();
     }
-    messageElement.textContent = text;
+    if (isURL(text)) {
+      //text = "<a href='"+text+"'>"+text+"</a>"; 
+      var textMsg = document.createElement("a");
+      textMsg.href=text;
+      textMsg.innerHTML=text; 
+      textMsg.setAttribute("target", "_blank"); 
+      messageElement.append(textMsg);
+    }else{
+      messageElement.innerHTML = text;
+    }
+    
     // Replace all line breaks by <br>.
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
   } else if (imageUri) { // If the message is an image.
@@ -390,3 +400,17 @@ FriendlyChat.prototype.checkSetup = function() {
 window.onload = function() {
   window.friendlyChat = new FriendlyChat();
 };
+
+(function () {
+  // TODO add service worker code here
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('./service-worker.js')
+             .then(function() { console.log('Service Worker Registered'); });
+  }
+})(); 
+
+function isURL(str) {
+  var pattern = new RegExp("[a-zA-Z\d]+://(\w+:\w+@)?([a-zA-Z\d.-]+\.[A-Za-z]{2,4})(:\d+)?(/.*)?"); // fragment locator
+  return pattern.test(str);
+}

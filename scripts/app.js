@@ -46,7 +46,7 @@ function getUiConfig() {
         provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         scopes: ['https://www.googleapis.com/auth/plus.login']
       },
-      /*{
+      {
         provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         scopes :[
           'public_profile',
@@ -67,7 +67,7 @@ function getUiConfig() {
         recaptchaParameters: {
           size: getRecaptchaMode()
         }
-      }*/
+      }
     ],
     // Terms of service url.
     'tosUrl': 'https://www.google.com'

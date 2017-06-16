@@ -324,6 +324,9 @@ FriendlyChat.prototype.displayMessage = function(key, userId, name, text, textTi
     }else{
       audio.play();
       container.innerHTML = FriendlyChat.MESSAGE_TEMPLATE_RECEIVER;
+      var myWorker = new Worker('service-worker.js');
+      myWorker.postMessage(text);
+      navigator.serviceWorker.controller.postMessage(text);
     }
     div = container.firstChild;
     div.setAttribute('id', key);
@@ -361,14 +364,12 @@ FriendlyChat.prototype.displayMessage = function(key, userId, name, text, textTi
     }else{
       messageElement.innerHTML = text;
     }
-    var myWorker = new Worker('service-worker.js');
-    myWorker.postMessage(text);
-    navigator.serviceWorker.controller.postMessage(text);
+
     navigator.serviceWorker.addEventListener('message' , function(event) {
       // use `event.data`
       console.log('[Service Worker] Push Received.');;
 
-      const title = 'New Message from Firechat';
+      const title = 'New Message from main';
       const options = {
         body: 'Yay it works.',
         icon: 'images/icon.png',
@@ -377,8 +378,7 @@ FriendlyChat.prototype.displayMessage = function(key, userId, name, text, textTi
 
       event.waitUntil(self.registration.showNotification(title, options));
     });
-
-
+    
     // Replace all line breaks by <br>.
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
   } else if (imageUri) { // If the message is an image.

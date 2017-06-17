@@ -529,3 +529,9 @@ header.demo-drawer-header {
 div#container {
     text-align: center;
 }
+
+/* css4 */
+a:-webkit-any-link{
+    color: rgba(10, 0, 255, 0.77);
+    text-decoration: none;
+}

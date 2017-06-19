@@ -51,6 +51,7 @@ main,
     height: 100%;
     padding-top: 0;
     padding-bottom: 0;
+    font-size: var(--msg-font);   
 }
 
 #messages {
@@ -199,6 +200,10 @@ main,
 #message-form .mdl-textfield {
     /* width: calc(100% - 100px); */
     width: 100%;
+}
+
+input#message {
+    font-size: var(--msg-font);
 }
 
 #message-form button,

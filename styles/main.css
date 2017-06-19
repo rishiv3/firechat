@@ -1,3 +1,8 @@
+:root {
+  --msg-font: 9px;
+}
+
+
 html,
 body {
     font-family: 'Roboto', 'Helvetica', sans-serif;

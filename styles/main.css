@@ -524,6 +524,6 @@ div#container {
 
 /* css4 */
 a:-webkit-any-link{
-    color: rgba(10, 0, 255, 0.77);
+    color: #0066c0;
     text-decoration: none;
 }

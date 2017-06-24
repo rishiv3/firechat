@@ -1,12 +1,13 @@
 :root {
   --msg-font: 12px;
   --font-color: #757575 !important;
-  --main-backgroud : #e3e3e3
+  --main-backgroud : #e3e3e3;
+  --main-font : 'Roboto', 'Helvetica', sans-serif;
 }
 
 html,
 body {
-    font-family: 'Roboto', 'Helvetica', sans-serif;
+    font-family: var(--main-font);
 }
 
 input[type="text"]{font-family: inherit;}

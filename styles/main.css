@@ -10,7 +10,7 @@ body {
     font-family: var(--main-font);
 }
 
-input[type="text"]{font-family: inherit;}
+input[type="text"]{font-family: var(--main-font);}
 
 main,
 #messages-card {

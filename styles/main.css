@@ -5,12 +5,9 @@
   --main-font : 'Roboto', 'Helvetica', sans-serif;
 }
 
-html,
-body {
+html, body, input[type="text"] {
     font-family: var(--main-font);
 }
-
-input[type="text"]{font-family: var(--main-font);}
 
 main,
 #messages-card {

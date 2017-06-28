@@ -98,6 +98,7 @@ var signInWithPopup = function() {
  * Displays the UI for a signed in user.
  * @param {!firebase.User} user
  */
+// getting logged in user's data
 var handleSignedInUser = function(user) {
   document.getElementById('user-signed-in').style.display = 'block';
   document.getElementById('user-signed-out').style.display = 'none';
@@ -110,6 +111,7 @@ var handleSignedInUser = function(user) {
   } else {
     document.getElementById('photo').style.display = 'none';
   }
+  // redirect user after login
   window.location = "profile.html"
 };
 

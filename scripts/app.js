@@ -185,4 +185,5 @@ var initApp = function() {
       .checked = true;*/
 };
 
+// initiating app
 window.addEventListener('load', initApp);

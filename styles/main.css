@@ -436,7 +436,7 @@ _:-ms-input-placeholder, :root .demo-graphs {
 _:-ms-input-placeholder, :root .demo-graph {
   max-height: 300px;
 }
-/* TODO end */
+/* TODO: end */
 .demo-graph:nth-child(1) {
   color: #00b9d8;
 }

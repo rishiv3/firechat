@@ -180,9 +180,9 @@ var initApp = function() {
       });
 
   // Check the selected reCAPTCHA mode.
-  /*document.querySelector(
+  document.querySelector(
       'input[name="recaptcha"][value="' + getRecaptchaMode() + '"]')
-      .checked = true;*/
+      .checked = true;
 };
 
 // initiating app

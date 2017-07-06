@@ -1,8 +1,0 @@
-{
-  "name": "FrieChat",
-  "description": "Firebase SDK for chatting app",
-  "dependencies": {
-    "firebase-admin": "^4.1.1",
-    "firebase-functions": "^0.5.1"
-  }
-}

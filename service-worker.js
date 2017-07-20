@@ -1,7 +1,7 @@
 'use strict';
 
 /* eslint-disable max-len */
-
+// its a random key. change it before use it.
 const applicationServerPublicKey = 'BH8-hIchXKMI6AKSee8gD0hhPThRqaEhIEtMJwcTjEQhiOKdG-_2tTIO-6hOAK4kwg5M9Saedjxp4hVE-khhWxY';
 
 /* eslint-enable max-len */

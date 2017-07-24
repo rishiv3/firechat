@@ -1,4 +1,4 @@
-//sw for notification
+//sw for notifications
 'use strict';
 
 /* eslint-disable max-len */

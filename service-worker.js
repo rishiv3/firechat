@@ -1,6 +1,3 @@
-//lsiting all the bugs here
-//1. any url coming twice 
-
 //sw for notifications
 'use strict';
 

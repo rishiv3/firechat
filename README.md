@@ -14,3 +14,5 @@ BOT
 BOT
 
 I'm devious, cruel, cunning and addictive.
+I'm devious, cruel, cunning and addictive.
+I'm devious, cruel, cunning and addictive.

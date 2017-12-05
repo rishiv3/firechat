@@ -4,7 +4,7 @@ Firechat is an open-source, real-time chat widget built on Firebase. It offers f
 
 Clone this repo or downlaod the code and update details in **init.js** and you are done.
 
-## Notifincation messages 
+## Notifincation messages for chrome
 
 Firebase Cloud Messaging Quickstart
 ===================================

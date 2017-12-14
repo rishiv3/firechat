@@ -106,6 +106,4 @@ License
 
 ##### Let me know if you have any issues.
 
-TODO : update api and sw request
-
 

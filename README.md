@@ -105,5 +105,5 @@ License
 -------
 
 ##### Let me know if you have any issues.
-TODO : Check the bot
+TODO : Day One commit
 
